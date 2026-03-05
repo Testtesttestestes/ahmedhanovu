@@ -12,7 +12,7 @@ jobs:
   build-report-task1:
     runs-on: ubuntu-latest
     env:
-      SURNAME: Ivanov
+      SURNAME: Milenkov
       DISTRO: ubuntu-22.04
     steps:
       - name: Checkout
