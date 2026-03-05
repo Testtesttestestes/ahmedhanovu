@@ -1,0 +1,33 @@
+name: Task 1 - VM and Linux install report
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/task1-vm-report.yml'
+      - 'scripts/task1_vm_report.sh'
+      - 'scripts/text_to_png.py'
+
+jobs:
+  build-report-task1:
+    runs-on: ubuntu-latest
+    env:
+      SURNAME: Ivanov
+      DISTRO: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y qemu-utils cloud-image-utils curl python3-pil
+
+      - name: Generate report
+        run: bash scripts/task1_vm_report.sh
+
+      - name: Upload report artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: task1-report
+          path: reports/task1
