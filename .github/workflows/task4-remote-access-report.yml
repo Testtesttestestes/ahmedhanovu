@@ -1,0 +1,33 @@
+name: Task 4 - SSH and RDP remote access report
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/task4-remote-access-report.yml'
+      - 'scripts/task4_remote_access_report.sh'
+      - 'scripts/build_pdf_report.py'
+      - 'scripts/text_to_png.py'
+
+jobs:
+  build-report-task4:
+    runs-on: ubuntu-latest
+    env:
+      REPORT_AUTHOR: Миленькова Ивана
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pil
+
+      - name: Generate PDF report
+        run: bash scripts/task4_remote_access_report.sh
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: task4-report-pdf
+          path: reports/task4/report.pdf
