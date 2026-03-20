@@ -1,10 +1,11 @@
 # Автоматические отчёты по заданиям (GitHub Actions)
 
-В репозитории настроены **3 отдельных workflow** (по одному на каждую практическую работу):
+В репозитории настроены **4 отдельных workflow** (по одному на каждую практическую работу):
 
 1. `Task 1 - VM and Linux install report`
 2. `Task 2 - Terminal commands report`
 3. `Task 3 - Filesystem image report`
+4. `Task 4 - SSH and RDP remote access report`
 
 Каждый workflow:
 - запускается вручную (`workflow_dispatch`),
