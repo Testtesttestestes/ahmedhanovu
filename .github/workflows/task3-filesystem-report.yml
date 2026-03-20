@@ -6,11 +6,14 @@ on:
     paths:
       - '.github/workflows/task3-filesystem-report.yml'
       - 'scripts/task3_filesystem_report.sh'
+      - 'scripts/build_pdf_report.py'
       - 'scripts/text_to_png.py'
 
 jobs:
   build-report-task3:
     runs-on: ubuntu-latest
+    env:
+      REPORT_AUTHOR: Миленькова Ивана
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -20,11 +23,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y e2fsprogs util-linux python3-pil
 
-      - name: Generate report
+      - name: Generate PDF report
         run: bash scripts/task3_filesystem_report.sh
 
-      - name: Upload report artifact
+      - name: Upload PDF artifact
         uses: actions/upload-artifact@v4
         with:
-          name: task3-report
-          path: reports/task3
+          name: task3-report-pdf
+          path: reports/task3/report.pdf
