@@ -1,0 +1,24 @@
+name: Task 7 - Process signals report
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/task7-process-signals-report.yml'
+      - 'scripts/task7_process_signals_report.sh'
+      - 'scripts/build_pdf_report.py'
+      - 'scripts/text_to_png.py'
+jobs:
+  build-report-task7:
+    runs-on: ubuntu-latest
+    env:
+      REPORT_AUTHOR: Миленькова Ивана
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pil procps
+      - run: bash scripts/task7_process_signals_report.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: task7-report-pdf
+          path: reports/task7/report.pdf
