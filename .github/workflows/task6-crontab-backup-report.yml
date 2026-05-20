@@ -1,0 +1,24 @@
+name: Task 6 - Crontab backup report
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/task6-crontab-backup-report.yml'
+      - 'scripts/task6_crontab_backup_report.sh'
+      - 'scripts/build_pdf_report.py'
+      - 'scripts/text_to_png.py'
+jobs:
+  build-report-task6:
+    runs-on: ubuntu-latest
+    env:
+      REPORT_AUTHOR: Миленькова Ивана
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pil
+      - run: bash scripts/task6_crontab_backup_report.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: task6-report-pdf
+          path: reports/task6/report.pdf

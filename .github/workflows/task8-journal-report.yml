@@ -1,0 +1,24 @@
+name: Task 8 - Journalctl report
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/task8-journal-report.yml'
+      - 'scripts/task8_journal_report.sh'
+      - 'scripts/build_pdf_report.py'
+      - 'scripts/text_to_png.py'
+jobs:
+  build-report-task8:
+    runs-on: ubuntu-latest
+    env:
+      REPORT_AUTHOR: Миленькова Ивана
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pil systemd
+      - run: bash scripts/task8_journal_report.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: task8-report-pdf
+          path: reports/task8/report.pdf
