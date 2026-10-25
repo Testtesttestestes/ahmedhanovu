@@ -1,0 +1,27 @@
+name: Winter 2026 Task 3 - Login watcher report
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/winter-2026-task3-login-watch.yml'
+      - 'scripts/watch_login.sh'
+      - 'scripts/task_winter_2026_login_report.sh'
+      - 'scripts/build_pdf_report.py'
+      - 'scripts/text_to_png.py'
+
+jobs:
+  build-report-winter-2026-task3:
+    runs-on: ubuntu-latest
+    env:
+      REPORT_AUTHOR: Миленькова Ивана
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y python3-pil
+      - name: Generate PDF report
+        run: bash scripts/task_winter_2026_login_report.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: winter-2026-task3-login-watch-report-pdf
+          path: reports/winter-2026-task3/report.pdf
