@@ -52,7 +52,7 @@ echo 20000 | sudo tee /proc/sys/dev/raid/speed_limit_max >/dev/null
 {
   echo "### 1. create RAID 1"
   echo "\$ sudo mdadm --create /dev/md0 --level=1 --raid-devices=2 ${R1[*]}"
-  yes | sudo mdadm --create /dev/md0 --level=1 --raid-devices=2 --metadata=1.2 "${R1[@]}" 2>&1
+  sudo mdadm --create /dev/md0 --level=1 --raid-devices=2 --metadata=1.2 --run "${R1[@]}" 2>&1
   echo
   echo "### 2. status right after creation (resync in progress)"
   run cat /proc/mdstat
@@ -95,7 +95,7 @@ echo 20000 | sudo tee /proc/sys/dev/raid/speed_limit_max >/dev/null
 {
   echo "### 1. create RAID 5"
   echo "\$ sudo mdadm --create /dev/md1 --level=5 --raid-devices=3 ${R5[*]}"
-  yes | sudo mdadm --create /dev/md1 --level=5 --raid-devices=3 --metadata=1.2 "${R5[@]}" 2>&1
+  sudo mdadm --create /dev/md1 --level=5 --raid-devices=3 --metadata=1.2 --run "${R5[@]}" 2>&1
 } > "$LOG_DIR/05_raid5_create.txt"
 sleep 3
 {
