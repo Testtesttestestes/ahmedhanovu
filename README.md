@@ -29,3 +29,8 @@
 - `Winter 2026 Task 7 - iptables firewall report` (`scripts/task_winter_2026_firewall_report.sh`): политика DROP, loopback, ESTABLISHED/RELATED, SSH, HTTP/HTTPS, ICMP с лимитом, логирование `IPTABLES-DROP` и сохранение правил. Затем проверяются SSH и веб-сервер, выводятся `iptables -L -n -v` и `dmesg | grep IPTABLES-DROP`.
 
 «ВМ» и «другая машина» здесь — два сетевых пространства имён (`netns vm` 10.200.0.1 и `netns client` 10.200.0.2), соединённые veth-парой (`scripts/task_winter_2026_netns_lib.sh`). Правила iptables применяются только внутри `netns vm`, сеть раннера не затрагивается.
+
+## Зима 2026: Docker и RAID
+
+- `Winter 2026 Task 8 - Docker nginx report` (`scripts/task_winter_2026_docker_nginx_report.sh`): Docker, `docker pull nginx`, запуск с `-p 8080:80`, проверка `docker ps` и `curl`, создание `index.html` с именем через `docker exec`, перезапуск контейнера и кастомная страница.
+- `Winter 2026 Task 9 - mdadm RAID 1 and RAID 5 report` (`scripts/task_winter_2026_raid_report.sh`): RAID 1 `/dev/md0` из двух дисков и RAID 5 `/dev/md1` из трёх, `/proc/mdstat` во время синхронизации, `mdadm --detail`, ext4, монтирование и проверка файлов, в том числе при отказе одного диска. Диски — loop-устройства поверх файлов.

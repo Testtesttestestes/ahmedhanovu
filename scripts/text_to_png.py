@@ -7,10 +7,13 @@ parser = argparse.ArgumentParser()
 parser.add_argument('input_file')
 parser.add_argument('output_file')
 parser.add_argument('--title', default='')
+parser.add_argument('--font', default='', help='optional TTF font (e.g. DejaVuSansMono for Cyrillic)')
 args = parser.parse_args()
 
 text = Path(args.input_file).read_text(encoding='utf-8', errors='replace')
 font = ImageFont.load_default()
+if args.font and Path(args.font).exists():
+    font = ImageFont.truetype(args.font, 13)
 lines = []
 for raw_line in text.splitlines() or ['']:
     line = raw_line.expandtabs(4)
